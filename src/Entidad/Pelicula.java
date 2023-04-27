@@ -11,19 +11,39 @@ import java.util.Date;
  * @author CHATARRA-2
  */
 public class Pelicula {
+
     private int id;
     private int id_genero;
+    private String generoNombre;
     private int id_estudio;
+    private String estudioNombre;
     private String titulo;
     private Date añoPublicacion;
     private String director;
     private String sinopsis;
     private String ruta;
 
+    public Pelicula() {
+
+    }
+
     public Pelicula(int id, int id_genero, int id_estudio, String titulo, Date añoPublicacion, String director, String sinopsis, String ruta) {
         this.id = id;
         this.id_genero = id_genero;
         this.id_estudio = id_estudio;
+        this.titulo = titulo;
+        this.añoPublicacion = añoPublicacion;
+        this.director = director;
+        this.sinopsis = sinopsis;
+        this.ruta = ruta;
+    }
+
+    public Pelicula(int id, int id_genero, String generoNombre, int id_estudio, String estudioNombre, String titulo, Date añoPublicacion, String director, String sinopsis, String ruta) {
+        this.id = id;
+        this.id_genero = id_genero;
+        this.generoNombre = generoNombre;
+        this.id_estudio = id_estudio;
+        this.estudioNombre = estudioNombre;
         this.titulo = titulo;
         this.añoPublicacion = añoPublicacion;
         this.director = director;
@@ -47,12 +67,28 @@ public class Pelicula {
         this.id_genero = id_genero;
     }
 
+    public String getGeneroNombre() {
+        return generoNombre;
+    }
+
+    public void setGeneroNombre(String generoNombre) {
+        this.generoNombre = generoNombre;
+    }
+
     public int getId_estudio() {
         return id_estudio;
     }
 
     public void setId_estudio(int id_estudio) {
         this.id_estudio = id_estudio;
+    }
+
+    public String getEstudioNombre() {
+        return estudioNombre;
+    }
+
+    public void setEstudioNombre(String estudioNombre) {
+        this.estudioNombre = estudioNombre;
     }
 
     public String getTitulo() {
@@ -99,7 +135,5 @@ public class Pelicula {
     public String toString() {
         return "Pelicula{" + "id=" + id + ", id_genero=" + id_genero + ", id_estudio=" + id_estudio + ", titulo=" + titulo + ", a\u00f1oPublicacion=" + añoPublicacion + ", director=" + director + ", sinopsis=" + sinopsis + ", ruta=" + ruta + '}';
     }
-    
-    
-    
+
 }

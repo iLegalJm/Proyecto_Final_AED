@@ -4,6 +4,8 @@
  */
 package Vistas;
 
+import Negocio.PeliculaControl;
+
 /**
  *
  * @author CHATARRA-2
@@ -13,11 +15,40 @@ public class FrmlPeliculas extends javax.swing.JPanel {
     /**
      * Creates new form FrmlInicio
      */
+    private final PeliculaControl CONTROL;
+
+    private int totalPorPagina = 10;
+    private int numPaginas = 1;
+    private boolean primeraCarga = true;
+    private int totalRegistros;
+
     public FrmlPeliculas() {
-        initComponents();       
+        initComponents();
+        this.CONTROL = new PeliculaControl();
+        listar("", false);
+        ocultarColumnas();
+    }
+
+    private void listar(String texto, boolean paginar) {
+
+        if (paginar == true) {
+            tablaListado.setModel(this.CONTROL.listar(texto, this.totalPorPagina, this.numPaginas));
+        } else {
+            tablaListado.setModel(this.CONTROL.listar(texto, this.totalPorPagina, 1));
+        }
+
     }
     
-    
+    private void ocultarColumnas(){
+        tablaListado.getColumnModel().getColumn(1).setMaxWidth(0);
+        tablaListado.getColumnModel().getColumn(1).setMinWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+         tablaListado.getColumnModel().getColumn(3).setMaxWidth(0);
+        tablaListado.getColumnModel().getColumn(3).setMinWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,22 +91,23 @@ public class FrmlPeliculas extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                        .addGap(327, 327, 327)))
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1)
                 .addGap(21, 21, 21))
         );
 

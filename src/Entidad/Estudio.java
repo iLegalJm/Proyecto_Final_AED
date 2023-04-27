@@ -11,6 +11,5 @@ package Entidad;
 public class Estudio {
     private int id;
     private String nombre;
-    
-    
+   
 }

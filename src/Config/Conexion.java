@@ -17,7 +17,7 @@ public class Conexion {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3377/";
-    private static final String BD = "tourindb?autoReconnect=true&useSSL=false";
+    private static final String BD = "catalogo?autoReconnect=true&useSSL=false";
     private static final String USER = "root";
     private static final String PASSWORD = "..MalTin2022";
 
@@ -32,7 +32,7 @@ public class Conexion {
         try {
             Class.forName(DRIVER);
             this.conex = DriverManager.getConnection(URL + BD, USER, PASSWORD);
-            JOptionPane.showMessageDialog(null, "Conexion correcta");
+//            JOptionPane.showMessageDialog(null, "Conexion correcta");
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
 
