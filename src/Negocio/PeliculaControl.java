@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,14 +24,14 @@ public class PeliculaControl {
 
     private final PeliculaDao DATOS;
     private final GeneroDao DATOSGENERO;
-    private Pelicula objGenero;
+    private Pelicula obj;
     private DefaultTableModel modeloTabla;
     public int registrosMostrados;
 
     public PeliculaControl() {
         this.DATOS = new PeliculaDao();
         this.DATOSGENERO = new GeneroDao();
-        this.objGenero = new Pelicula();
+        this.obj = new Pelicula();
         this.registrosMostrados = 0;
     }
 
@@ -67,13 +68,13 @@ public class PeliculaControl {
         List<Pelicula> lista = new ArrayList();
         List<Pelicula> listaTemp = new ArrayList();
         listaTemp.addAll(DATOS.listar(texto, totalPorPagina, numPagina));
-        
+
         for (int i = 0; i < listaTemp.size(); i++) {
             if (listaTemp.get(i).getGeneroNombre().equals(genero)) {
                 lista.add(listaTemp.get(i));
             }
         }
-        
+
         String[] titulos = {"Id", "Género Id", "Género", "Estudio Id", "Estudio", "Título", "Año publicación", "Director", "Sinopsis", "Ruta"};
         this.modeloTabla = new DefaultTableModel(null, titulos);
 
@@ -97,5 +98,29 @@ public class PeliculaControl {
             this.registrosMostrados = this.registrosMostrados + 1;
         }
         return this.modeloTabla;
+    }
+
+    public String insertar(int GeneroId, int EstudioId, String titulo, Date añoPublicacion, String director, String sinopsis, String ruta) {
+        if (DATOS.existe(titulo)) {
+            return "La pelicula ya ha sido agregada";
+        } else {
+            obj.setId_genero(GeneroId);
+            obj.setId_estudio(EstudioId);
+            obj.setTitulo(titulo);
+            obj.setAñoPublicacion(añoPublicacion);
+            obj.setDirector(director);
+            obj.setSinopsis(sinopsis);
+            obj.setRuta(ruta);
+
+            if (DATOS.insertar(obj)) {
+                return "OK";
+            } else {
+                return "Error al registrar";
+            }
+        }
+    }
+
+    public int total() {
+        return DATOS.total();
     }
 }

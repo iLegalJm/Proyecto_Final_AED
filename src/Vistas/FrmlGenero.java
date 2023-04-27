@@ -36,21 +36,33 @@ public class FrmlGenero extends javax.swing.JPanel {
 
     private void initStyles() {
         lblTitulo.putClientProperty("FlatLaf.style", "font: 200% $light.font");
-        tablaListado.putClientProperty("Table.background", Color.BLACK);
+//        tablaListado.putClientProperty("Table.background", Color.BLACK);
     }
 
     private void listar(String texto) {
         tablaListado.setModel(this.CONTROL.listar(texto));
     }
-    
-    private void listarPorGenero(String seleccionado){
+
+    private void ocultarColumnas() {
+        tablaListado.getColumnModel().getColumn(1).setMaxWidth(0);
+        tablaListado.getColumnModel().getColumn(1).setMinWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+        tablaListado.getColumnModel().getColumn(3).setMaxWidth(0);
+        tablaListado.getColumnModel().getColumn(3).setMinWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
+        tablaListado.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+    }
+
+    private void listarPorGenero(String seleccionado) {
         tablaListado.setModel(this.CONTROLPELICULA.listarPorGenero("", 10, 1, seleccionado));
     }
 
-    private void cargarGeneros(){
+    private void cargarGeneros() {
         DefaultComboBoxModel items = this.CONTROL.seleccionar();
         cboListarPorGenero.setModel(items);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,8 +82,6 @@ public class FrmlGenero extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(780, 500));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
         tablaListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -85,7 +95,7 @@ public class FrmlGenero extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tablaListado);
 
-        lblTitulo.setText("Películas por género");
+        lblTitulo.setText("PELICULAS POR GENERO");
 
         cboListarPorGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +105,7 @@ public class FrmlGenero extends javax.swing.JPanel {
 
         jLabel1.setText("Escoge tu género favorito");
 
-        btnBuscar.setText("Buscar");
+        btnBuscar.setText("Filtrar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -107,32 +117,33 @@ public class FrmlGenero extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(cboListarPorGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cboListarPorGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 245, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cboListarPorGenero)
-                        .addComponent(btnBuscar))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboListarPorGenero)
+                    .addComponent(btnBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

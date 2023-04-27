@@ -8,6 +8,7 @@ import Config.Conexion;
 import DaoImpl.InterfaceCrudPaginado;
 import DaoImpl.InterfaceCrudSimple;
 import Entidad.Pelicula;
+import java.sql.Date;
 import java.util.List;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class PeliculaDao implements InterfaceCrudPaginado<Pelicula> {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                registros.add(new Pelicula(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5),  rs.getString(6), rs.getDate(7), rs.getString(8), rs.getString(9), rs.getString(10)));
+                registros.add(new Pelicula(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getDate(7), rs.getString(8), rs.getString(9), rs.getString(10)));
             }
             ps.close();
             rs.close();
@@ -57,7 +58,27 @@ public class PeliculaDao implements InterfaceCrudPaginado<Pelicula> {
 
     @Override
     public boolean insertar(Pelicula obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        resp = false;
+        try {
+            ps = cx.conectar().prepareStatement("INSERT INTO pelicula (id_genero, id_estudio, titulo, año_publicacion, director, sinopsis, ruta) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, obj.getId_genero());
+            ps.setInt(2, obj.getId_estudio());
+            ps.setString(3, obj.getTitulo());
+            ps.setDate(4, (Date) obj.getAñoPublicacion());
+            ps.setString(5, obj.getDirector());
+            ps.setString(6, obj.getSinopsis());
+            ps.setString(7, obj.getRuta());
+            if (ps.executeUpdate() > 0) {
+                resp = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        } finally {
+            ps = null;
+            cx.desconectar();
+        }
+        return resp;
     }
 
     @Override
@@ -67,12 +88,48 @@ public class PeliculaDao implements InterfaceCrudPaginado<Pelicula> {
 
     @Override
     public int total() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int totalRegistros = 0;
+        try {
+            ps = cx.conectar().prepareStatement("Select count(id) from pelicula");
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                totalRegistros = rs.getInt("count(id)");
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            cx.desconectar();
+        }
+        return totalRegistros;
     }
 
     @Override
     public boolean existe(String texto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        resp = false;
+        try {
+            ps = cx.conectar().prepareStatement("Select titulo from pelicula where nombre=?");
+            ps.setString(1, texto);
+            rs = ps.executeQuery();
+
+            if (rs.getRow() > 0) {
+                resp = true;
+            }
+
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            cx.desconectar();
+        }
+        return resp = false;
     }
 
 }
