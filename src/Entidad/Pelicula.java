@@ -18,7 +18,7 @@ public class Pelicula {
     private int id_estudio;
     private String estudioNombre;
     private String titulo;
-    private Date añoPublicacion;
+    private int añoPublicacion;
     private String director;
     private String sinopsis;
     private String ruta;
@@ -27,7 +27,7 @@ public class Pelicula {
 
     }
 
-    public Pelicula(int id, int id_genero, int id_estudio, String titulo, Date añoPublicacion, String director, String sinopsis, String ruta) {
+    public Pelicula(int id, int id_genero, int id_estudio, String titulo, int añoPublicacion, String director, String sinopsis, String ruta) {
         this.id = id;
         this.id_genero = id_genero;
         this.id_estudio = id_estudio;
@@ -38,7 +38,7 @@ public class Pelicula {
         this.ruta = ruta;
     }
 
-    public Pelicula(int id, int id_genero, String generoNombre, int id_estudio, String estudioNombre, String titulo, Date añoPublicacion, String director, String sinopsis, String ruta) {
+    public Pelicula(int id, int id_genero, String generoNombre, int id_estudio, String estudioNombre, String titulo, int añoPublicacion, String director, String sinopsis, String ruta) {
         this.id = id;
         this.id_genero = id_genero;
         this.generoNombre = generoNombre;
@@ -99,11 +99,11 @@ public class Pelicula {
         this.titulo = titulo;
     }
 
-    public Date getAñoPublicacion() {
+    public int getAñoPublicacion() {
         return añoPublicacion;
     }
 
-    public void setAñoPublicacion(Date añoPublicacion) {
+    public void setAñoPublicacion(int añoPublicacion) {
         this.añoPublicacion = añoPublicacion;
     }
 

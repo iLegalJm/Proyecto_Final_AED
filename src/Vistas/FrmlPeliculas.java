@@ -34,16 +34,9 @@ public class FrmlPeliculas extends javax.swing.JPanel {
         this.paginar();
         listar("", false);
         this.primeraCarga = false;
-        cargarGeneros();
-
     }
 
-    private void cargarGeneros() {
-        DefaultComboBoxModel items = this.CONTROLGENERO.seleccionar();
-        cboListarPorGenero.setModel(items);
-    }
-
-    private void listar(String texto, boolean paginar) {
+    public void listar(String texto, boolean paginar) {
         this.totalPorPagina = Integer.parseInt((String) cboTotalPorPagina.getSelectedItem());
         if ((String) cboNumeroPagina.getSelectedItem() != null) {
             this.numPaginas = Integer.parseInt((String) cboNumeroPagina.getSelectedItem());
@@ -106,7 +99,6 @@ public class FrmlPeliculas extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         cboTotalPorPagina = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        cboListarPorGenero = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(748, 508));
 
@@ -125,7 +117,7 @@ public class FrmlPeliculas extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tablaListado);
 
-        jLabel1.setText("Péliculas");
+        jLabel1.setText("PÉLICULAS");
 
         jLabel2.setText("#Páginas:");
 
@@ -169,10 +161,8 @@ public class FrmlPeliculas extends javax.swing.JPanel {
                                 .addGap(50, 50, 50)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboTotalPorPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(cboListarPorGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(154, Short.MAX_VALUE))
+                                .addComponent(cboTotalPorPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(346, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
@@ -195,8 +185,7 @@ public class FrmlPeliculas extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(cboNumeroPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(cboTotalPorPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboListarPorGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboTotalPorPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -233,7 +222,6 @@ public class FrmlPeliculas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cboListarPorGenero;
     private javax.swing.JComboBox<String> cboNumeroPagina;
     private javax.swing.JComboBox<String> cboTotalPorPagina;
     private javax.swing.JButton jButton1;

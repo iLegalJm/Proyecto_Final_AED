@@ -6,13 +6,9 @@ package Negocio;
 
 import Dao.GeneroDao;
 import Dao.PeliculaDao;
-import Entidad.Genero;
 import Entidad.Pelicula;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -69,6 +65,7 @@ public class PeliculaControl {
         List<Pelicula> listaTemp = new ArrayList();
         listaTemp.addAll(DATOS.listar(texto, totalPorPagina, numPagina));
 
+        //Busqueda lineal o linear search
         for (int i = 0; i < listaTemp.size(); i++) {
             if (listaTemp.get(i).getGeneroNombre().equals(genero)) {
                 lista.add(listaTemp.get(i));
@@ -80,7 +77,6 @@ public class PeliculaControl {
 
 //        String estado;
         String[] registro = new String[10];
-        SimpleDateFormat objFecha = new SimpleDateFormat("yyyy");
         this.registrosMostrados = 0;
         for (Pelicula item : lista) {
             registro[0] = Integer.toString(item.getId());
@@ -89,7 +85,7 @@ public class PeliculaControl {
             registro[3] = Integer.toString(item.getId_estudio());
             registro[4] = item.getEstudioNombre();
             registro[5] = item.getTitulo();
-            registro[6] = objFecha.format(item.getAñoPublicacion()); // Para obtener la fecha primero creamos un objeto de simple date format
+            registro[6] = Integer.toString(item.getAñoPublicacion());
             registro[7] = item.getDirector();
             registro[8] = item.getSinopsis();
             registro[9] = item.getRuta();
@@ -100,7 +96,7 @@ public class PeliculaControl {
         return this.modeloTabla;
     }
 
-    public String insertar(int GeneroId, int EstudioId, String titulo, Date añoPublicacion, String director, String sinopsis, String ruta) {
+    public String insertar(int GeneroId, int EstudioId, String titulo, int añoPublicacion, String director, String sinopsis, String ruta) {
         if (DATOS.existe(titulo)) {
             return "La pelicula ya ha sido agregada";
         } else {

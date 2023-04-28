@@ -17,6 +17,11 @@ public class Genero implements Comparable<Genero> {
 
     }
 
+    @Override
+    public int compareTo(Genero objGenero) {
+        return nombre.compareTo(objGenero.getNombre());
+    }
+
     public Genero(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
@@ -39,15 +44,8 @@ public class Genero implements Comparable<Genero> {
     }
 
     @Override
-    public int compareTo(Genero objGenero) {
-        return nombre.compareTo(objGenero.getNombre());
-    }
-
-    @Override
     public String toString() {
-        return  nombre;
+        return nombre;
     }
-    
-    
 
 }

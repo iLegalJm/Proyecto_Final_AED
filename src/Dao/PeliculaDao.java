@@ -42,7 +42,7 @@ public class PeliculaDao implements InterfaceCrudPaginado<Pelicula> {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                registros.add(new Pelicula(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getDate(7), rs.getString(8), rs.getString(9), rs.getString(10)));
+                registros.add(new Pelicula(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10)));
             }
             ps.close();
             rs.close();
@@ -64,7 +64,7 @@ public class PeliculaDao implements InterfaceCrudPaginado<Pelicula> {
             ps.setInt(1, obj.getId_genero());
             ps.setInt(2, obj.getId_estudio());
             ps.setString(3, obj.getTitulo());
-            ps.setDate(4, (Date) obj.getAñoPublicacion());
+            ps.setInt(4, obj.getAñoPublicacion());
             ps.setString(5, obj.getDirector());
             ps.setString(6, obj.getSinopsis());
             ps.setString(7, obj.getRuta());
@@ -112,7 +112,7 @@ public class PeliculaDao implements InterfaceCrudPaginado<Pelicula> {
     public boolean existe(String texto) {
         resp = false;
         try {
-            ps = cx.conectar().prepareStatement("Select titulo from pelicula where nombre=?");
+            ps = cx.conectar().prepareStatement("Select titulo from pelicula where titulo=?");
             ps.setString(1, texto);
             rs = ps.executeQuery();
 

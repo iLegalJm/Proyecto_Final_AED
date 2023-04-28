@@ -9,14 +9,6 @@ import Entidad.Genero;
 import Negocio.EstudioControl;
 import Negocio.GeneroControl;
 import Negocio.PeliculaControl;
-import com.toedter.calendar.JYearChooser;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -56,6 +48,14 @@ public class FrmlAgregarPelicula extends javax.swing.JDialog {
         cboListaDeEstudios.setModel(itemsEstudio);
     }
 
+    private void mensajeError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Sistema", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void mensajeOK(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Sistema", JOptionPane.ERROR_MESSAGE);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,7 +81,6 @@ public class FrmlAgregarPelicula extends javax.swing.JDialog {
         txtSinopsis = new javax.swing.JTextArea();
         btnAgregar = new javax.swing.JButton();
         txtRuta = new javax.swing.JTextField();
-        txtAño = new javax.swing.JTextField();
         jYearAño = new com.toedter.calendar.JYearChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -141,19 +140,12 @@ public class FrmlAgregarPelicula extends javax.swing.JDialog {
                             .addComponent(jScrollPane1)
                             .addComponent(txtRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtAño, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboListarPorGeneros, javax.swing.GroupLayout.Alignment.LEADING, 0, 158, Short.MAX_VALUE))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cboListaDeEstudios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(38, 38, 38)
-                                        .addComponent(jYearAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addComponent(cboListarPorGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cboListaDeEstudios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jYearAño, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -173,10 +165,8 @@ public class FrmlAgregarPelicula extends javax.swing.JDialog {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboListaDeEstudios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jYearAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -228,15 +218,16 @@ public class FrmlAgregarPelicula extends javax.swing.JDialog {
 
         Genero seleccionadoGenero = (Genero) cboListarPorGeneros.getSelectedItem();
         Estudio seleccionadoEstudio = (Estudio) cboListaDeEstudios.getSelectedItem();
-        java.sql.Date fechaIngreso= null;
-        SimpleDateFormat formater = new SimpleDateFormat("yyyy");
-       
-        
-        
-//        Falta terminar
-//        resp = this.CONTROL.insertar(seleccionadoGenero.getId(), seleccionadoEstudio.getId(), txtTitulo.getText(), año, txtDirector.getText(), txtSinopsis.getText(), txtRuta.getText());
 
-        
+        resp = this.CONTROL.insertar(seleccionadoGenero.getId(), seleccionadoEstudio.getId(), txtTitulo.getText(), jYearAño.getYear(), txtDirector.getText(), txtSinopsis.getText(), txtRuta.getText());
+
+        if (resp.equals("OK")) {
+            this.mensajeOK("Pelicula registrada correctamente.");
+            FrmlPeliculas objPeliculas = new FrmlPeliculas();
+            objPeliculas.listar("", false);
+        } else {
+            mensajeError(resp);
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
@@ -258,7 +249,6 @@ public class FrmlAgregarPelicula extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JYearChooser jYearAño;
-    private javax.swing.JTextField txtAño;
     private javax.swing.JTextField txtDirector;
     private javax.swing.JTextField txtRuta;
     private javax.swing.JTextArea txtSinopsis;

@@ -19,9 +19,8 @@ public class FrmlDashboard extends javax.swing.JFrame {
     /**
      * Creates new form juju
      */
-    
     public JFrame contenedor;
-    
+
     public FrmlDashboard() {
         initComponents();
         initContent();
@@ -56,7 +55,6 @@ public class FrmlDashboard extends javax.swing.JFrame {
         btnInicio = new javax.swing.JButton();
         btnPeliculas = new javax.swing.JButton();
         btnGeneros = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,6 +88,11 @@ public class FrmlDashboard extends javax.swing.JFrame {
         btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInicio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnInicio.setIconTextGap(15);
+        btnInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInicioActionPerformed(evt);
+            }
+        });
 
         btnPeliculas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/video.png"))); // NOI18N
         btnPeliculas.setText("Películas");
@@ -117,13 +120,6 @@ public class FrmlDashboard extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
@@ -131,9 +127,6 @@ public class FrmlDashboard extends javax.swing.JFrame {
             .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jButton1))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,8 +136,7 @@ public class FrmlDashboard extends javax.swing.JFrame {
                 .addComponent(btnPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98)
-                .addComponent(jButton1))
+                .addGap(120, 120, 120))
         );
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
@@ -192,11 +184,10 @@ public class FrmlDashboard extends javax.swing.JFrame {
         showPanel(new FrmlGenero());
     }//GEN-LAST:event_btnGenerosActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
         // TODO add your handling code here:
-//        FrmlAgregarPelicula frml = new FrmlAgregarPelicula(contenedor, this, true);
-//        frml.toFront();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        showPanel(new FrmlInicio());
+    }//GEN-LAST:event_btnInicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,7 +210,6 @@ public class FrmlDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnInicio;
     private javax.swing.JButton btnPeliculas;
     private javax.swing.JPanel content;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel nav;

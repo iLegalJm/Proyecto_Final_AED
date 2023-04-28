@@ -40,7 +40,7 @@ public class GeneroControl {
         List<Genero> lista = new ArrayList();
         lista.addAll(DATOS.listar(texto));
 
-//        ORDENAMIENTO POR COMPARACION
+        //ORDENAMIENTO POR COMPARACION, CompareTo
         Collections.sort(lista);
 
         String[] titulos = {"Id", "Género"};
